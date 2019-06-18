@@ -1,0 +1,761 @@
+/* NOTE: Style provisoire Mocking page d'acceuil */
+
+body{
+   font-family: 'Sawarabi Gothic', sans-serif;
+  text-align: justify;
+  font-size: 0.9rem;
+}
+
+
+p {
+  font-family: 'Sawarabi Gothic', sans-serif;
+  text-align: justify;
+  font-size: 0.9rem;
+}
+
+.partnersTitle, .titleComments h3, .titleStorytelling {
+   text-transform: none;
+  font-family: 'Merienda', cursive;
+  font-size: 2.2rem;
+  color: #407fd2;
+  font-weight: normal;
+}
+
+.titleStep h2 {
+   text-transform: none;
+  font-family: 'Merienda', cursive;
+  font-size: 2rem;
+ 
+  font-weight: normal;
+  margin-top: 2rem;
+}
+
+.textStep .card-title h3 {
+   font-size: 1.5rem;
+}
+
+.advantageTitle {
+   background-color: #407fd2;
+}
+
+.advantageTitle h3{
+     font-family: 'Merienda', cursive;
+     font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.7rem;
+}
+
+.media-body h4 {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+/* NOTE: header */
+
+.header {
+  background-image: url("../img/25453.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+header {
+  font-family: 'Redressed', sans-serif;
+  background-color: white;
+  color: #24c76f;
+  text-shadow: grey;
+}
+
+.mainText {
+  height: 17rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-shadow: 3px 3px #dff400;
+}
+
+.mainText h1 {
+  font-size: 4rem;
+  padding: 0.5rem;
+  font-weight: bold;
+  letter-spacing: 0.1rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* NOTE:  Media query pour la taille du texte tapé dans le header sur petit écran */
+/* NOTE: demander à fabien */
+
+@media only screen and (max-widht: 600px) {
+  .mainText h1 {
+    font-size: 2rem;
+  }
+}
+
+
+.mainText h1 span.typed-text {
+  font-weight: normal;
+  color: #407fd2;
+  text-shadow: 3px 3px #0055cc;
+}
+
+.mainText h1 span.cursor {
+  display: inline-block;
+  background-color: #ccc;
+  margin-left: 0.1rem;
+  width: 3px;
+  animation: blink 1s infinite;
+}
+.mainText h1 span.cursor.typing {
+  animation: none;
+}
+@keyframes blink {
+  0%  { background-color: #ccc; }
+  49% { background-color: #ccc; }
+  50% { background-color: transparent; }
+  99% { background-color: transparent; }
+  100%  { background-color: #ccc; }
+}
+
+/* NOTE: step */
+
+.step {
+  margin: 0;
+}
+
+/* NOTE: caroussel */
+ .partnersTitle {
+   font-family: 'Wendy One', cursive;
+   font-size: 2.2rem;
+ }
+
+/* NOTE: Comments */
+
+
+/* NOTE: Comments page d'acceuil */
+
+.fas {
+  color: grey;
+}
+
+/* NOTE: police
+Carter One
+<link href="https://fonts.googleapis.com/css?family=Carter+One" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Carter+One|Fredericka+the+Great" rel="stylesheet">
+  NOTE: Vidéo responsive - storytelling */
+
+.storytelling {
+   background-color: rgba(153,153,153,0.2);
+}
+
+iframe {
+  margin-bottom: 3rem;
+}
+
+/* NOTE: fenetre modal */
+
+.loginTitle i {
+  margin-right: 2px;
+}
+
+/*.jumbotron {
+  background-color: #b02116;
+  background-size: cover;
+  color: #ffffff;
+  padding:100px 25px;
+  font-family: Montserrat, sans-serif;
+}*/
+
+.navbar {
+  font-family: Montserrat, sans-serif;
+  background-color: #b02116;
+}
+
+h2 {
+    font-size: 24px;
+    text-transform: uppercase;
+    color: #303030;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+h4 {
+    font-size: 19px;
+    line-height: 1.375em;
+    color: #303030;
+    font-weight: 400;
+    margin-bottom: 30px;
+}
+
+.bg-grey {
+  background-color: #f6f6f6;
+}
+
+.logo {
+  font-size: 200px;
+  color: #b02116;
+}
+
+.logo-small {
+  color: #b02116;
+  font-size: 50px;
+}
+
+.thumbnail {
+  padding: 0 0 15px 0;
+  border: none;
+  border-radius: 0;
+}
+
+.thumbnal img {
+  width:100%;
+  height:100%;
+  margin-bottom:10px;
+}
+
+
+
+.panel {
+  border: 1px solid #4da6ff;
+  border-radius: 0;
+  transition: box-shadow 0.5s;
+}
+
+.panel:hover {
+  box-shadow: 5px 0px 40px rgba(0,0,0, .2);
+}
+
+.panel-footer .btn:hover {
+  border: 1px solid #4da6ff;
+  background-color: #fff !important;
+  color: #4da6ff;
+}
+
+.panel-heading {
+  color: #fff !important;
+  background-color: #4da6ff !important;
+  padding: 25px;
+  border-bottom: 1px solid transparent;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.panel-footer {
+  background-color: #fff !important;
+}
+
+.panel-footer h3 {
+  font-size: 32px;
+}
+
+.panel-footer h4 {
+  color: #aaa;
+  font-size: 14px;
+}
+
+.panel-footer .btn {
+  margin: 15px 0;
+  background-color: #4da6ff;
+  color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+  .col-sm-4 {
+    text-align: center;
+    margin: 25px 0;
+  }
+  .jumbotron {
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+}
+
+.navbar {
+  margin-bottom: 0;
+  background-color: #b02116;
+  z-index: 9999;
+  border: 0;
+  font-size: 12px;
+  line-height: 1.42857143;
+  letter-spacing: 4px;
+  border-radius: 0;
+}
+
+.navbar li a, .navbar .navbar-brand {
+  color: #fff !important;
+}
+
+.navbar-nav li a:hover, .navbar-nav li.active a {
+  color: #b02116 !important;
+  background-color: #fff !important;
+}
+
+.navbar-default .navbar-toggle {
+  border-color: transparent;
+  color: #fff !important;
+}
+
+.slideanim {
+  visibility: hidden;
+}
+
+.slide {
+  animation-name: slide;
+  -webkit-animation-name: slide;
+  animation-duration: 1s;
+  -webkit-animation-duration: 1s;
+  visibility: visible;
+}
+
+#loginModal {
+  margin-top: 50px;
+}
+
+.modal-header, .modal-header h4, .close {
+  background-color: #d9534f;
+  color: white !important;
+  text-align: center;
+  font-size: 30px;
+  padding: 15px 50px 0px 50px;
+}
+
+.modal-body {
+  padding: 40px 50px;
+}
+
+.modal-footer {
+  background-color: #f9f9f9;
+}
+
+/* NOTE: Footer */
+
+.footer {
+  background-color: rgba(39, 109, 155, 0.8);
+}
+
+.footer h6 {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.footer li {
+  list-style: none;
+  color: white;
+}
+
+.footer li a {
+  color: white;
+}
+
+.sloganFooter {
+  font-family: 'Satisfy', cursive;
+  font-size: 1.5rem;
+}
+
+.list-group-item-primary {
+  background-color: #528aaf;
+}
+
+/* NOTE: Carrousel */
+
+.carousel-example {
+  height: 100%;
+}
+
+
+@media (min-width: 576px) and (max-width: 768px) {
+  /* Show 3rd slide on sm  if col-sm-6*/
+    .carousel-inner .active.col-sm-6.carousel-item + .carousel-item + .carousel-item {
+        position: absolute;
+        top: 0;
+        right: -50%;  /*change this with javascript in the future*/
+        z-index: -1;
+        display: block;
+        visibility: visible;
+    }
+
+}
+@media (min-width: 576px) {
+
+    .carousel-item {
+        margin-right: 0;
+    }
+
+    /* show 2 items */
+    .carousel-inner .active + .carousel-item {
+        display: block;
+    }
+
+    .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left),
+    .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item {
+        transition: none;
+    }
+
+    .carousel-inner .carousel-item-next {
+      position: relative;
+      transform: translate3d(0, 0, 0);
+    }
+
+    /* left or forward direction */
+    .active.carousel-item-left + .carousel-item-next.carousel-item-left,
+    .carousel-item-next.carousel-item-left + .carousel-item,
+    .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item {
+        position: relative;
+        transform: translate3d(-100%, 0, 0);
+        visibility: visible;
+    }
+
+    /* farthest right hidden item must be abso position for animations */
+    .carousel-inner .carousel-item-prev.carousel-item-right {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        display: block;
+        visibility: visible;
+    }
+
+    /* right or prev direction */
+    .active.carousel-item-right + .carousel-item-prev.carousel-item-right,
+    .carousel-item-prev.carousel-item-right + .carousel-item,
+    .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item {
+        position: relative;
+        transform: translate3d(100%, 0, 0);
+        visibility: visible;
+        display: block;
+        visibility: visible;
+    }
+
+}
+
+/*MD*/
+@media (min-width: 768px) {
+
+    /* show 3rd of 3 item slide */
+  .carousel-inner .active + .carousel-item + .carousel-item {
+        display: block;
+    }
+
+    .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item + .carousel-item {
+        transition: none;
+    }
+
+
+    .carousel-inner .carousel-item-next {
+      position: relative;
+      transform: translate3d(0, 0, 0);
+    }
+
+
+    /* left or forward direction */
+    .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item + .carousel-item {
+        position: relative;
+        transform: translate3d(-100%, 0, 0);
+        visibility: visible;
+    }
+
+    /* right or prev direction */
+    .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item + .carousel-item {
+        position: relative;
+        transform: translate3d(100%, 0, 0);
+        visibility: visible;
+        display: block;
+        visibility: visible;
+    }
+
+}
+
+
+/*LG */
+@media (min-width: 991px) {
+
+    /* show 4th item */
+    .carousel-inner .active + .carousel-item + .carousel-item + .carousel-item {
+        display: block;
+    }
+
+    .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item + .carousel-item + .carousel-item {
+        transition: none;
+    }
+
+    /* Show 5th slide on lg if col-lg-3 */
+    .carousel-inner .active.col-lg-3.carousel-item + .carousel-item + .carousel-item + .carousel-item + .carousel-item {
+        position: absolute;
+        top: 0;
+        right: -25%;  /*change this with javascript in the future*/
+        z-index: -1;
+        display: block;
+        visibility: visible;
+    }
+
+    /* left or forward direction */
+    .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item + .carousel-item + .carousel-item {
+        position: relative;
+        transform: translate3d(-100%, 0, 0);
+        visibility: visible;
+    }
+
+    /* right or prev direction //t - previous slide direction last item animation fix */
+    .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item + .carousel-item + .carousel-item {
+        position: relative;
+        transform: translate3d(100%, 0, 0);
+        visibility: visible;
+        display: block;
+        visibility: visible;
+    }
+
+}
+
+/*LG 6th  -  if you want a carousel with 6 slides */
+@media (min-width: 991px) {
+
+        /* show 5th and 6th item */
+ /*   .carousel-inner .active + .carousel-item + .carousel-item + .carousel-item + .carousel-item,
+  .carousel-inner .active + .carousel-item + .carousel-item + .carousel-item + .carousel-item + .carousel-item {
+        display: block;
+    }
+
+
+
+    .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item + .carousel-item + .carousel-item + .carousel-item,
+  .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item + .carousel-item + .carousel-item + .carousel-item + .carousel-item {
+      transition: none;
+    }
+*/
+
+
+  /*show 7th slide for animation when its a 6 slides carousel */
+ /*      .carousel-inner .active.carousel-item + .carousel-item + .carousel-item + .carousel-item + .carousel-item + .carousel-item  + .carousel-item {
+        position: absolute;
+        top: 0;
+        right: -16.666666666%;
+        z-index: -1;
+        display: block;
+        visibility: visible;
+  }
+  */
+
+      /* forward direction > */
+ /*   .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item + .carousel-item + .carousel-item,
+  .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item + .carousel-item + .carousel-item + .carousel-item {
+        position: relative;
+        transform: translate3d(-100%, 0, 0);
+        visibility: visible;
+    }
+  */
+      /* prev direction < last item animation fix */
+ /*   .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item + .carousel-item + .carousel-item + .carousel-item,
+    .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item + .carousel-item + .carousel-item + .carousel-item + .carousel-item {
+        position: relative;
+        transform: translate3d(100%, 0, 0);
+        visibility: visible;
+        display: block;
+        visibility: visible;
+    }
+*/
+
+/* NOTE: footer social-icons */
+
+ul.social-icons {
+  margin-top: 10px;
+  padding-left: 0px;
+}
+
+.social-icons li {
+  vertical-align: top;
+  display: inline;
+  height: 100px;
+}
+
+.social-icons a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.fa-facebook-f {
+  padding: 10px 14px;
+  -o-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.fa-facebook-f:hover {
+  background-color: #3d5b99;
+}
+
+.fa-twitter {
+  padding: 10px 12px;
+  -o-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.fa-twitter:hover {
+  background-color: #00aced;
+}
+
+.fa-linkedin-in {
+  padding: 10px 12px;
+  -o-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.fa-linkedin-in:hover {
+  background-color: #0073a4;
+}
+
+.fa-google-plus-g {
+  padding: 10px 12px;
+  -o-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.fa-google-plus-g:hover {
+  background-color: #e25714;
+}
+
+// style test carte google map
+
+.map-responsive{
+    overflow:hidden;
+    padding-bottom:50%;
+    position:relative;
+    height:0;
+}
+.map-responsive iframe{
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    position:absolute;
+}
+
+/* sizes */
+$navbar-height: 55px;
+$sidebar-width: 220px;
+/* colors */
+$html-background: #eee;
+$sidebar-background: rgba(45,53,60,.65);
+$sidebar-link-color: #ddd;
+
+
+
+
+
+/* CSS start */
+
+.main {
+	top: $navbar-height;
+}
+.navbar {
+	height: $navbar-height;
+}	
+html {
+	background: #EFEFBB;   fallback for old browsers 
+	background: -webkit-linear-gradient(to right, #D4D3DD, #EFEFBB);   Chrome 10-25, Safari 5.1-6 
+	background: linear-gradient(to right, #D4D3DD, #EFEFBB);  W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ 
+
+}
+
+
+
+#sidebar {
+	overflow: hidden;
+}
+#sidebar .list-group {
+  min-width: $sidebar-width;
+	background: $sidebar-background;
+  min-height: calc(100vh - #{$navbar-height});
+}
+#sidebar .list-group-item {
+	border-radius: 0;
+	background-color: $sidebar-background;
+	color: $sidebar-link-color;
+	border-left: 0;
+	border-right: 0;
+	border-color: #2c2c2c;
+	white-space: nowrap;
+	padding: .5rem 1.25rem;
+}
+
+
+
+.collapse.show {
+  visibility: visible;
+}
+.collapsing {
+  visibility: visible;
+  height: 0;
+  -webkit-transition-property: height, visibility;
+  transition-property: height, visibility;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+.collapsing.width {
+  -webkit-transition-property: width, visibility;
+  transition-property: width, visibility;
+  width: 0;
+  height: 100%;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+
+@media (max-width:768px) {
+	.content {
+		padding-left: 20px;
+	}
+	.navbar-brand {
+		position: absolute;
+		left: calc(50% - 90px);
+
+	}
+	#sidebar {
+		min-width: 38px;
+		max-width: 38px;
+		overflow-y: auto;
+		overflow-x: visible;
+		transition: all 0.25s ease;
+		transform: translateX(-45px);
+		position: fixed;
+   }
+	#sidebar.show {
+		transform: translateX(0);
+	}
+	#sidebar::-webkit-scrollbar{ width: 0px; }
+	#sidebar, #sidebar .list-group {
+		min-width: 38px;
+		overflow: visible;
+	}
+	 overlay sub levels on small screens 
+	#sidebar .list-group .collapse.show, #sidebar .list-group .collapsing {
+		position: relative;
+		z-index: 1;
+		width: 190px;
+		top: 0;
+	}
+	#sidebar .list-group > .list-group-item {
+		text-align: center;
+		padding: .4rem;
+	}
+	 hide caret icons of top level when collapsed 
+	#sidebar .list-group > .list-group-item[aria-expanded="true"]::after,
+	#sidebar .list-group > .list-group-item[aria-expanded="false"]::after {
+		display:none;
+	}
+}
+
