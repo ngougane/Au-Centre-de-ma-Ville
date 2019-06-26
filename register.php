@@ -1,14 +1,16 @@
 <?php
+ require 'modalLogin.php';
+require 'controllers/usersRegisterCtrl.php';
 $titlePage = "Inscription - Au Centre de ma ville";
 require 'includes/header.php';
-require 'controllers/usersRegisterCtrl.php';
+
 var_dump($_POST);
 ?>
 
 <section>
    <div class="container">
-      <?php if (count($_POST) == 0 || count($formErrors) > 0) { ?>
-<form action="inscription.php" method="POST">
+      <?php if (count($_POST) == 0 || !empty($formErrors)) { ?>
+         <form action="register.php" method="POST" enctype="multipart/form-data">
             <h1 class="mt-3 text-center">Votre Inscription</h1>
             <hr />
             <div class="form-group row">
@@ -18,13 +20,13 @@ var_dump($_POST);
                      <?php
                      /*
                       * ROLE
-                      * La boucle foreach permettra d'afficher 
+                      * La boucle foreach permettra d'afficher
                       * Pour garder la saisie utilisateur, on ajoute l'attribut checked s'il a coché l'input
                       */
                      foreach ($listroles as $role) {
                         ?>
                         <div class="form-check form-check-inline">
-                           <input type="radio" id="<?= $role->id ?>" name="role" value="<?= $role->id ?>" class="form-check-input <?= isset($formErrors['role']) ? 'is-invalid' : (count($_POST) > 0 ? 'is-valid' : '') ?>">
+                           <input type="radio" id="<?= $role->id ?>" name="role" value="<?= $role->id ?>" <?= isset($_POST['role']) && $_POST['role'] == $role->id ? 'checked' : '' ?> class="form-check-input <?= isset($formErrors['role']) ? 'is-invalid' : (count($_POST) > 0 ? 'is-valid' : '') ?>">
                            <label class="form-check-label" for="<?= $role->id ?>"><?= $role->name ?></label>
                         </div>
                         <?php
@@ -33,8 +35,8 @@ var_dump($_POST);
                         ?>
                         <div class="invalid-feedback d-block "><?= $formErrors['role'] ?></div>
                      <?php } ?>
-                  </div> 
-               </div>  
+                  </div>
+               </div>
 
 
                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
@@ -42,13 +44,13 @@ var_dump($_POST);
                      <legend>Civilité</legend>
                      <?php
                      /*
-                      * La boucle foreach permettra d'afficher 
+                      * La boucle foreach permettra d'afficher
                       * Pour garder la saisie utilisateur, on ajoute l'attribut checked s'il a coché l'input
                       */
                      foreach ($listcivility as $civility) {
                         ?>
                         <div class="form-check form-check-inline">
-                           <input type="radio" id="roleYes" name="civility" value="<?=$civility->id ?>" <?= isset($_POST['civility']) && $_POST['civility'] == $civility->id ? 'checked' : '' ?> class="form-check-input <?= isset($formErrors['civility']) ? 'is-invalid' : (count($_POST) > 0 ? 'is-valid' : '') ?>">
+                           <input type="radio" id="roleYes" name="civility" value="<?= $civility->id ?>" <?= isset($_POST['civility']) && $_POST['civility'] == $civility->id ? 'checked' : '' ?> class="form-check-input <?= isset($formErrors['civility']) ? 'is-invalid' : (count($_POST) > 0 ? 'is-valid' : '') ?>">
                            <label class="form-check-label" for="roleYes"><?= $civility->civility ?></label>
                         </div>
                         <?php
@@ -58,7 +60,7 @@ var_dump($_POST);
                         ?>
                         <div class="invalid-feedback d-block"><?= $formErrors['civility'] ?></div>
                      <?php } ?>
-                  </div> 
+                  </div>
                </div>
             </div>
             <div class="form-group row">
@@ -180,7 +182,7 @@ var_dump($_POST);
                   <div class="col-12 col-sm-6 col-md-6 col-lg-6">
                      <!--                     <legend>Créer la fiche de votre commerce</legend>-->
                      <label for="name">Nom du commerce</label>
-                     <select name="name" id="name" class="form-control">
+                     <select name="name" id="name" class="form-control <?= isset($formErrors['name']) ? 'is-invalid' : (count($_POST) > 0 ? 'is-valid' : '') ?>">
                         <option selected disabled>Saisir votre SIREN</option>
                      </select>
                      <?php
@@ -195,7 +197,7 @@ var_dump($_POST);
                <div class="form-group row">
                   <div class="col-12 col-sm-6 col-md-6 col-lg-6">
                      <label for="activity">Activité</label>
-                     <select name="activity" id="activity" class="form-control">
+                     <select name="activity" id="activity" class="form-control <?= isset($formErrors['activity']) ? 'is-invalid' : (count($_POST) > 0 ? 'is-valid' : '') ?>">
                         <option selected disabled>Saisir votre SIREN</option>
                      </select>
                      <?php
@@ -208,7 +210,7 @@ var_dump($_POST);
                   </div>
                   <div class="col-12 col-sm-6 col-md-6 col-lg-6">
                      <label for="openingTime">Vos horaires d'ouverture</label>
-                     <input type="text"   class="form-control  <?= isset($formErrors['openingTime']) ? 'is-invalid' : (count($_POST) > 0 ? 'is-valid' : '') ?>" name="openingTime" value="" id="openingTime" placeholder="Du lundi au vendredi de 9h à 18h" />
+                     <input type="text"   class="form-control  <?= isset($formErrors['openingTime']) ? 'is-invalid' : (count($_POST) > 0 ? 'is-valid' : '') ?>" name="openingTime" value="<?= isset($_POST['openingTime']) ? $_POST['openingTime'] : '' ?>" id="openingTime" placeholder="Du lundi au vendredi de 9h à 18h" />
                      <?php
                      if (isset($formErrors['openingTime'])) {
                         ?>
@@ -221,10 +223,9 @@ var_dump($_POST);
                </div>
                <div class="form-group row">
                   <div class="col-12 col-sm-6 col-md-6 col-lg-6">
-                     <p>Photo de votre commerce</p>
-                     <div class="custom-file">
-                        <input class="custom-input-file" type="file" name="file" id="file" />
-                        <label for="file" class="custom-file-label">Sélectionner une photo</label>
+                     <div>
+                        <label for="file" >Photo de votre commerce</label>
+                        <input type="file" class="form-control  <?= isset($formErrors['file']) ? 'is-invalid' : (count($_POST) > 0 ? 'is-valid' : '') ?>" name="file" id="file" />
                      </div>
                   </div>
                   <?php if (isset($formErrors['file'])) { ?>
@@ -243,7 +244,7 @@ var_dump($_POST);
                   <div class="col-12 col-sm-6 col-md-6 col-lg-6">
 
                      <label for="jobTitle">Intitulé de votre poste</label>
-                     <input type="text"  class="form-control  <?= isset($formErrors['jobTitle']) ? 'is-invalid' : (count($_POST) > 0 ? 'is-valid' : '') ?>" name="jobTitle" value="" id="jobTitle" placeholder="Manager centre ville" />
+                     <input type="text"  class="form-control  <?= isset($formErrors['jobTitle']) ? 'is-invalid' : (count($_POST) > 0 ? 'is-valid' : '') ?>" name="jobTitle"  value="<?= isset($_POST['jobTitle']) ? $_POST['jobTitle'] : '' ?>" id="jobTitle" placeholder="Manager centre ville" />
                      <?php
                      if (isset($formErrors['jobTitle'])) {
                         ?>
@@ -254,7 +255,7 @@ var_dump($_POST);
                   </div>
                   <div class="col-12 col-sm-6 col-md-6 col-lg-6">
                      <label for="service">Service</label>
-                     <input type="text"  class="form-control  <?= isset($formErrors['service']) ? 'is-invalid' : (count($_POST) > 0 ? 'is-valid' : '') ?>" name="service" value="" id="service" placeholder="Pôle Economie" />
+                     <input type="text"  class="form-control  <?= isset($formErrors['service']) ? 'is-invalid' : (count($_POST) > 0 ? 'is-valid' : '') ?>" name="service"  value="<?= isset($_POST['service']) ? $_POST['service'] : '' ?>" id="service" placeholder="Pôle Economie" />
                      <?php
                      if (isset($formErrors['service'])) {
                         ?>
@@ -267,7 +268,7 @@ var_dump($_POST);
                <div class="form-group row">
                   <div class="col-12 col-sm-6 col-md-6 col-lg-6">
                      <label for="phoneNumberService">Numéro de téléphone de votre bureau</label>
-                     <input type="text"  class="form-control  <?= isset($formErrors['phoneNumberService']) ? 'is-invalid' : (count($_POST) > 0 ? 'is-valid' : '') ?>" name="phoneNumberService" value="" id="phoneNumberService" placeholder="03 02 02 02 05" />
+                     <input type="text"  class="form-control  <?= isset($formErrors['phoneNumberService']) ? 'is-invalid' : (count($_POST) > 0 ? 'is-valid' : '') ?>" name="phoneNumberService"  value="<?= isset($_POST['phoneNumberService']) ? $_POST['phoneNumberService'] : '' ?>" id="phoneNumberService" placeholder="03 02 02 02 05" />
                      <?php
                      if (isset($formErrors['phoneNumberService'])) {
                         ?>
@@ -279,7 +280,7 @@ var_dump($_POST);
                   <div class="col-12 col-sm-6 col-md-6 col-lg-6">
 
                      <label for="sirenCity">SIREN de votre commune</label>
-                     <input type="text"  class="form-control  <?= isset($formErrors['sirenCity']) ? 'is-invalid' : (count($_POST) > 0 ? 'is-valid' : '') ?>" name="sirenCity" value="" id="sirenCitySearch" placeholder="2546215" />
+                     <input type="text"  class="form-control  <?= isset($formErrors['sirenCity']) ? 'is-invalid' : (count($_POST) > 0 ? 'is-valid' : '') ?>" name="sirenCity" value="<?= isset($_POST['sirenCity']) ? $_POST['sirenCity'] : '' ?>" id="sirenCitySearch" placeholder="2546215" />
                      <?php
                      if (isset($formErrors['sirenCity'])) {
                         ?>
@@ -327,7 +328,7 @@ var_dump($_POST);
                   <label for="invalidCheck" class="form-check-label">J'accepte  <a href="#">les conditions d'utilisations </a></label>
                   <div class="invalid-feedback">Vous devez accepter les conditions d'utilisations</div>
                </div>
-                           <input type="submit" class="btn btn-primary" name="checkForm"  value="Valider"/>
+               <input type="submit" class="btn btn-primary" name="checkForm"  value="Valider"/>
             </div>
 
          </form>
@@ -339,21 +340,23 @@ var_dump($_POST);
             <div class="row mb-3 mt-3">
                <div class="col-12 alert alert-success " role="alert">
                   <p><?= $formSuccess; ?></p>
-                  <p><a href="#" class='btn btn-primary' data-toggle="modal" data-target="#loginModal"><span><i class="fas fa-user"></i> </span>Se connecter</a></p>
-                              <?php
-                              require 'modalLogin.php';
-                           } else {
-                              ?>
-                  <div class="alert alert-danger" role='alert'>
-                     <p><?= $formErrors['create'] ?></p>
+                  <a href="#" class='btn btn-primary' data-toggle="modal" data-target="#loginModal"><span><i class="fas fa-user"></i> </span>Se connecter</a>
+                  <div class="row">
+                    
                   </div>
                   <?php
-                           }
-                           ?>
+               } else {
+                  ?>
+                  <div class="alert alert-danger" role='alert'>
+                     <p><?= !empty($formErrors['create']) ? $formErrors['create'] : '' ?></p>
+                  </div>
+                  <?php
+               }
+               ?>
             </div>
          </div>
-<?php } ?>
+      <?php } ?>
 
-   </div> 
+   </div>
 </section>
 <?php require_once 'includes/footer.php' ?>

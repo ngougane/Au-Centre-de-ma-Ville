@@ -1,7 +1,7 @@
 <?php
-require_once 'include/database.php';
+require_once 'database.php';
 /**
- * Classe qui gére les numéros de Siren des commerces
+ * Classe qui gére les numéros de Siren des commerc
  *
  * @author ngougane
  */
@@ -20,7 +20,7 @@ class siren {
  */
    public function __construct() {
       try {
-         $this->db= database::getInstance()->db;
+         $this->db= database::getInstance();
       } catch (Exception $ex) {
          die('Erreur : ' . $ex->getMessage());
       }

@@ -312,10 +312,10 @@ $(function () {
                    * 4.4 : Je crée une variable qui contiendra la concaténation des balises servant à l'affichage (ici des cellules de tableau)
                    * On y injecte les information du patient
                    */
-                  var display = '<option value="' + sirenCity.id + '"  ' + 'readonly >' + sirenCity.id + ' ' + '</option >'
+                  var display = '<option value="' + sirenCity.id + '"  ' + 'readonly >' + sirenCity.sirenEPCI + ' ' + '</option >'
                   //J'ajoute la ligne que je viens de créer au tableau, cette opération se répètera pour chaque patient dans le tableau results
                   $('#sirenEpci').append(display);
-                  var displayName = '<option value="' + sirenCity.id + '"  ' + 'readonly >' + sirenCity.id + ' ' + '</option >'
+                  var displayName = '<option value="' + sirenCity.id + '"  ' + 'readonly >' + sirenCity.nameEPCI + ' ' + '</option >'
                   //J'ajoute la ligne que je viens de créer au tableau, cette opération se répètera pour chaque patient dans le tableau results
                   $('#nameEpci').append(displayName);
 
@@ -353,6 +353,6 @@ $(function () {
        * Ici dans la div modal-body, on crée un paragraphe qui contient la question de confirmation.
        */
       modal.find('.modal-body').append('<p>' + userFirstname + ' ' + userLastname + ' confirmez-vous la suppresion de votre compte ? </p>');
-      modal.find('.modal-footer').append('<a href="liste-patients.php?deleteId=' + userId + '" class="btn btn-danger">Supprimer </a>');
+      modal.find('.modal-footer').append('<a href="dashboardProfil.php?deleteId=' + userId + '" class="btn btn-danger">Supprimer </a>');
    })
 })

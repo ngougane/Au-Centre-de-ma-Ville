@@ -23,6 +23,9 @@ Numéro de SIREN à tester
 799531298 LE COMPTOIR DES TEMPLIERS
 844923326 CHICKEN FAST FOOD
  837470947               BFC TACOS
+824700249                 TACOS FACTORY NOYON
+842208233               LE STROMBOLI
+488773151               LA FOURNEE DE JEAN   boulangerie@jean.fr
 //////////////////////////////////////////////
 
 Siren Commune Noyon 
@@ -36,3 +39,7 @@ Siren EPCI Communauté de Commune du Noyonnais
 Un établissement public de coopération intercommunale (EPCI) est une structure administrative française regroupant plusieurs communes 
 afin d'exercer certaines de leurs compétences en commun.
 
+/////////Compte responsable /// 
+Mathieu Jamet 
+resp@test.fr
+123

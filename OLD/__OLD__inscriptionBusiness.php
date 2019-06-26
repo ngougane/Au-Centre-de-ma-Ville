@@ -5,7 +5,7 @@ require 'includes/header.php';
 <section>
    <div class="container">
       <?php if (count($_POST) == 0 || count($formErrors) > 0) { ?>
-         <form name="addUser" action="inscription.php" method="POST">
+         <form name="addUser" action="register.php" method="POST">
             <fieldset>Profil </fieldset>
             <hr />
             <legend>Vous êtes ? </legend>

@@ -1,6 +1,6 @@
 
 
-<form action="inscription.php" method="POST">
+<form action="register.php" method="POST">
             <h1 class="mt-3 text-center">Votre Inscription</h1>
             <hr />
             <div class="form-group row">

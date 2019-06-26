@@ -8,7 +8,6 @@ if (isset($_POST['search'])) {
    //avec les chemins pour l'appel à Ajax
 //appel à la database qui est le singleton
    require '../models/database.php';
-   // appel
    require '../models/city.php';
    require_once '../includes/regex.php';
    $city = new city();
@@ -51,7 +50,6 @@ if (isset($_POST['search'])) {
       echo $_POST['sirenCitySearch'];
    }
 } else {
-
    //appel à la class autoloader
 //sa méthode permet de charger de manière dynamique les classes
 // dès qu'elles sont instanciés
@@ -73,8 +71,12 @@ if (isset($_POST['search'])) {
 //j'appelle la méthode qui me permettra d'afficher la liste des civilités
    $listcivility = $civility->getCivility();
    $organization = new organizations();
+   $siren = new siren();
+   $store = new store();
 
    if (count($_POST) > 0) {
+      //bolléen de succes d'envoie du fichier 
+      $successDoc = false;
 
 //Vérification du champs rôle
       if (!empty($_POST['role'])) {
@@ -195,95 +197,111 @@ if (isset($_POST['search'])) {
        * et donc que $_POST['role']=23
        * J'instancie la classe siren qui me permettra de faire à une méthode pour accéder aux numéros de siren sur la ville de noyon
        */
-//      if ($_POST['role'] == 23) {
-//
-//         $siren = new siren();
+      if (isset($_POST['role']) && $_POST['role'] == 23) {
+
 //         //vérification des valeurs saisis dans le champs Siren 
-//         if (!empty($_POST['sirenSearch'])) {
-//            if (preg_match($regexSiren, $_POST['sirenSearch'])) {
-//               //Je stocke le résultat dans une variable 
-//               $sirenSearch = htmlspecialchars($_POST['sirenSearch']);
-//            } else {
-//               $formErrors['sirenSearch'] = 'Veuillez saisir un numéro de SIREN valide';
-//            }
-//         } else {
-//            $formErrors['sirenSearch'] = 'Veuillez renseigner votre numéro de SIREN';
-//         }
-//         /**
-//          * Vérification du nom du commerce
-//          * J'instancie la classe store afin de pouvoir utiliser ses attributs
-//          */
-//         $store = new store();
-//         if (!empty($_POST['name'])) {
-//            if (preg_match($regexName, $_POST['name'])) {
-//               //Je stocke le résultat dans une variable 
-//               $store->idSiren = htmlspecialchars($_POST['name']);
-//            } else {
-//               $formErrors['name'] = 'Veuillez saisir un numéro de SIREN valide ou complet';
-//            }
-//         } else {
-//            $formErrors['name'] = 'Veuillez renseigner votre numéro de SIREN';
-//         }
-//         //vérifications des horaires d'ouverture
-//         if (!empty($_POST['openingTime'])) {
-//            if (preg_match($regexAddress, $_POST['openingTime'])) {
-//               //Je stocke le résultat dans une variable 
-//               $store->openingTime = htmlspecialchars($_POST['openingTime']);
-//            } else {
-//               $formErrors['openingTime'] = 'Veuillez saisir des horaires valides';
-//            }
-//         } else {
-//            $formErrors['openingTime'] = 'Veuillez renseigner vos horaires d\'ouverture';
-//         }
-//
+         if (!empty($_POST['siren'])) {
+            if (preg_match($regexSiren, $_POST['siren'])) {
+               //Je stocke le résultat dans une variable 
+               $siren = htmlspecialchars($_POST['siren']);
+            } else {
+               $formErrors['siren'] = 'Veuillez saisir un numéro de SIREN valide';
+            }
+         } else {
+            $formErrors['siren'] = 'Veuillez renseigner votre numéro de SIREN';
+         }
+         /**
+          * Vérification du nom du commerce
+          * J'instancie la classe store afin de pouvoir utiliser ses attributs
+          */
+         if (!empty($_POST['name'])) {
+            if (preg_match($regexSearch, $_POST['name'])) {
+               //Je stocke le résultat dans une variable 
+               $store->idSiren = htmlspecialchars($_POST['name']);
+            } else {
+               $formErrors['name'] = 'Veuillez saisir un numéro de SIREN valide ou complet';
+            }
+         } else {
+            $formErrors['name'] = 'Veuillez renseigner votre numéro de SIREN';
+         }
+         //vérifications des horaires d'ouverture
+         if (!empty($_POST['openingTime'])) {
+            if (preg_match($regexAddress, $_POST['openingTime'])) {
+               //Je stocke le résultat dans une variable 
+               $store->openingTime = htmlspecialchars($_POST['openingTime']);
+            } else {
+               $formErrors['openingTime'] = 'Veuillez saisir des horaires valides';
+            }
+         } else {
+            $formErrors['openingTime'] = 'Veuillez renseigner vos horaires d\'ouverture';
+         }
+
+
+         if (isset($_FILES['file']) && $_FILES['file']['error'] == 0) {
+            if ($_FILES['file']['size'] <= 5000000) {
+               $infoFIle = pathinfo($_FILES['file']['name']);
+               $fileExtend = $infoFIle['extension'];
+               $authExtend = ['png', 'jpg', 'jpeg'];
+               if (in_array($fileExtend, $authExtend)) {
+                  $successDoc = true;
+               } else {
+                  $formErrors['file'] = 'Veuillez insérer un fichier pdf ou jpg';
+               }
+            } else {
+               $formErrors['file'] = 'Le fichier est trop volumineux';
+            }
+         } else {
+            $formErrors['file'] = 'Une erreur est survenue';
+         }
 //         //Vérification du fichier en upload
 //         if (isset($_FILES['file'])) {
-//            $target_dir = "uploads/";
-//            $target_file = $target_dir . basename($_FILES["file"]["name"]);
+//            $target_dir = 'uploads/' . date('Y-m-d_H-i-s') . $_FILES['file']['name'];
+//
 //            $uploadOk = 1;
-//            $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+//            $imageFileType = strtolower(pathinfo($target_dir, PATHINFO_EXTENSION));
 ////Vérifie si le fichier image est une image réelle ou une image factice
-//            if (isset($_POST["submit"])) {
-//               $check = getimagesize($_FILES["file"]["tmp_name"]);
-//               if ($check !== false) {
-//                  $formErrors['file'] = "Le fichier est une image - " . $check["mime"] . ".";
+//            if (count($_FILES)) {
+//               $check = getimagesize($_FILES['file']['tmp_name']);
+//               if ($check != false) {
+//                  $formErrors['file'] = 'Le fichier est une image - ' . $check['mime'] . '';
 //                  $uploadOk = 1;
 //               } else {
-//                  $formErrors['file'] = "Le fichier n'est pas une image.";
+//                  $formErrors['file'] = 'Votre fichier n\'est pas du format attendu';
 //                  $uploadOk = 0;
 //               }
 //            }
 //// Vérifie si le fichier existe déjà
-//            if (file_exists($target_file)) {
-//               $formErrors['file'] = "Désolé, le fichier existe déjà.";
+//            if (file_exists($target_dir)) {
+//               $formErrors['file'] = 'Désolé, le fichier existe déjà.';
 //               $uploadOk = 0;
 //            }
 //// Vérifie la taille du fichier
-//            if ($_FILES["file"]["size"] > 5000000) {
-//               $formErrors['file'] = "Désolé, votre fichier est trop volumineux.";
+//            if ($_FILES['file']['size'] > 5000000) {
+//               $formErrors['file'] = 'Désolé, votre fichier est trop volumineux.';
 //               $uploadOk = 0;
 //            }
 //// Autoriser certains formats de fichier
-//            if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
-//               $formErrors['file'] = "Désolé, seuls les fichiers JPG, JPEG, PNG et GIF sont autorisés.";
+//            if ($imageFileType != 'jpg' && $imageFileType != 'png' && $imageFileType != 'jpeg' && $imageFileType != 'gif') {
+//               $formErrors['file'] = 'Désolé, seuls les fichiers JPG, JPEG, PNG et GIF sont autorisés.';
 //               $uploadOk = 0;
 //            }
 //// Vérifie si $ uploadOk est défini sur 0 par une erreur
 //            if ($uploadOk == 0) {
-//               $formErrors['img'] = "Désolé, votre fichier n'a pas été téléchargé.";
-//// Si tout va bien, l'upload du fichier peut commencé
+//               $formErrors['img'] = 'Désolé, votre fichier n\'a pas été téléchargé.';
 //            } else {
-//               if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
-//                  $store->photo = basename($_FILES["file"]["name"]);
+//               if (move_uploaded_file($_FILES['file']['tmp_name'], $target_dir)) {
+//                  chmod($target_dir, 0777);
+//                  $store->photo = basename($_FILES['file']['name']);
 //               } else {
-//                  $formErrors['file'] = "Désolé, une erreur s'est produite lors de l'envoi de votre fichier.";
+//                  $formErrors['file'] = 'Désolé, une erreur s\'est produite lors de l\'envoi de votre fichier.';
 //               }
 //            }
 //         }
-//      }
+      }
+
       if ($_POST['role'] == 24) {
 
-//vérification du prénom
+
          if (!empty($_POST['jobTitle'])) {
             if (preg_match($regexName, $_POST['jobTitle'])) {
                $organization->jobTitle = htmlspecialchars($_POST['jobTitle']);
@@ -298,10 +316,10 @@ if (isset($_POST['search'])) {
             if (preg_match($regexName, $_POST['service'])) {
                $organization->service = htmlspecialchars($_POST['service']);
             } else {
-               $formErrors['service'] = 'Veuillez saisir un nom de poste';
+               $formErrors['service'] = 'Veuillez saisir un nom de service ';
             }
          } else {
-            $formErrors['service'] = 'Veuillez renseigner un nom de poste';
+            $formErrors['service'] = 'Veuillez renseigner un nom de service';
          }
 
          if (!empty($_POST['phoneNumberService'])) {
@@ -346,10 +364,13 @@ if (isset($_POST['search'])) {
    //Si la comptabilisation du tableau d'erreur est égale à 0
 //   
    if (count($formErrors) == 0) {
-
+      if (isset($_POST['role']) && $_POST['role'] == 22) {
+         $user->createUser();
+         $formSuccess = 'Votre compte utilisateur a été crée avec succès. Vous pouvez à présent vous connecter';
+      }
       if (isset($_POST['role']) && $_POST['role'] == 24) {
          try {
-            $toto =$user->beginTransaction();
+            $user->beginTransaction();
             $user->createUser();
             $organization->idUsers = $user->lastInsertId();
             $organization->createService();
@@ -361,12 +382,25 @@ if (isset($_POST['search'])) {
             die('Error : ' . $ex);
          }
       }
-
-//       Ajout de l'utilisateur dans la base de données
-      else {
-         $user->createUser();
-         $formSuccess = 'Votre compte utilisateur a été crée avec succès. Vous pouvez à présent vous connecter';
+      if ((isset($successDoc)) && $successDoc === true) {
+         if (isset($_POST['role']) && $_POST['role'] == 23) {      
+            $target_dir = time().'.'.$fileExtend;
+            $store->photo = htmlspecialchars($target_dir);
+            move_uploaded_file($_FILES['file']['tmp_name'], 'uploads/' . basename($store->photo));
+              chmod('uploads/' . basename($store->photo), 0755);
+            try {
+               $user->beginTransaction();
+               $user->createUser();
+               $store->idUsers = $user->lastInsertId();
+               $store->createStore();
+               $store->commit();
+               $formSuccess = 'Votre inscription a bien été pris en compte, vous pouvez vous connecter.';
+            } catch (Exception $ex) {
+               $organization->rollback();
+               $formErrors['transaction'] = 'Veuillez nous excuser, votre incription n\'a pas abouti. ';
+               die('Error : ' . $ex);
+            }
+         }
       }
-//   }
    }
 }

@@ -48,7 +48,7 @@ class users {
       $queryExecute = $this->db->prepare($query);
       $queryExecute->bindValue(':firstname', $this->firstname, PDO::PARAM_STR);
       $queryExecute->bindValue(':lastname', $this->lastname, PDO::PARAM_STR);
-      $queryExecute->bindValue(':adresse', $this->lastname, PDO::PARAM_STR);
+      $queryExecute->bindValue(':adresse', $this->adresse, PDO::PARAM_STR);
       $queryExecute->bindValue(':phoneNumber', $this->phoneNumber, PDO::PARAM_STR);
       $queryExecute->bindValue(':mail', $this->mail, PDO::PARAM_STR);
       $queryExecute->bindValue(':password', $this->password, PDO::PARAM_STR);
@@ -86,7 +86,7 @@ class users {
     * @return object
     */
    public function getHashByMail() {
-      $query = 'SELECT  `id`, `password`, `lastname`, `firstname` '
+      $query = 'SELECT  `id`, `password`, `lastname`, `firstname`, `idRoles` '
               . 'FROM `CDM25PR_users` '
               . 'WHERE `mail` = :mail';
       $queryExecute = $this->db->prepare($query);
@@ -100,7 +100,7 @@ class users {
     * @return object
     */
    public function getUserInfo() {
-      $query ='SELECT `civility`,`firstname`,`lastname`,`mail`,`phonenumber`, `adresse`, `zipcode`,`city` ,  `CDM25PR_users`.`id`  '
+      $query ='SELECT `civility`,`firstname`,`lastname`,`mail`,`phoneNumber`, `adresse`, `zipcode`,`city` ,  `CDM25PR_users`.`id`  '
               . 'FROM `CDM25PR_users` '
               . 'INNER JOIN `CDM25PR_civility` '
               . 'ON `CDM25PR_civility`.`id` = `CDM25PR_users`.`idCivility` '
@@ -114,18 +114,33 @@ class users {
    }
 
    /**
+    * Méthode qui permet d'avoir l'idSiren de l'user commerçant afin de le récupérer dans les infos de session
+    * @return type
+    */
+      public function getUserBySiren() {
+      $query ='SELECT `CDM25PR_business`.`idSiren`, `CDM25PR_business`.`id` AS idStore '
+              . 'FROM `CDM25PR_business` '
+              . 'INNER JOIN `CDM25PR_users` '
+              . 'ON `CDM25PR_business`.`idUsers` = `CDM25PR_users`.`id` '
+              . 'WHERE `CDM25PR_users`.`id` = :id';
+      $queryExecute = $this->db->prepare($query);
+      $queryExecute->bindValue(':id', $_SESSION['id'], PDO::PARAM_INT);
+      $queryExecute->execute();
+      return $queryExecute->fetch(PDO::FETCH_OBJ);
+   }
+   /**
     * Méthode qui modifie les données de l'utilisateur
     */
    public function updateUser() {
       $query = 'UPDATE `CDM25PR_users` '
-              . 'SET `firstname`= :firstname ,`lastname`= :lastname,`mail`= :mail,`phonenumber`= :phonenumber '
+              . 'SET `firstname`= :firstname ,`lastname`= :lastname,`mail`= :mail,`phoneNumber`= :phoneNumber '
               . 'WHERE `CDM25PR_users`.`id` = :id';
       $queryExecute = $this->db->prepare($query);
       $queryExecute->bindValue(':firstname', $this->firstname, PDO::PARAM_STR);
       $queryExecute->bindValue(':lastname', $this->lastname, PDO::PARAM_STR);
       $queryExecute->bindValue(':mail', $this->mail, PDO::PARAM_STR);
-      $queryExecute->bindValue(':phonenumber', $this->phonenumber, PDO::PARAM_STR);
-      $queryExecute->bindValue(':id', $this->id, PDO::PARAM_INT);
+      $queryExecute->bindValue(':phoneNumber', $this->phoneNumber, PDO::PARAM_STR);
+      $queryExecute->bindValue(':id', $_SESSION['id'], PDO::PARAM_INT);
       return $queryExecute->execute();
    }
 
@@ -143,9 +158,18 @@ class users {
         return $queryExecute->execute();
     }
    
+    /**
+     * Méthode qui permet de commencer une transaction
+     * @return type
+     */
    public function beginTransaction(){
       return $this->db->beginTransaction();
    }
+   
+   /**
+    * Méthode qui permet de récupérer le dernier id inséré en BDD lors de la transaction 
+    * @return type
+    */
    public function lastInsertId(){
       return $this->db->lastInsertId();
    }

@@ -1,4 +1,6 @@
-<?php require 'includes/headerHome.php'; ?>
+<?php 
+session_start();
+require 'includes/headerHome.php'; ?>
 <body>
    <div class="container-fluid">
       <header>
@@ -108,7 +110,7 @@
                      <div class="row card-text mt-2">
                         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 md-auto">
                            <p>Ensemble élaborons une ville qui vous ressemble et qui vous rassemble. Avec une offre de services et des avantages qui répondent à vos besoins.</p>
-                           <a  class="btn btn-primary"  href="inscription.php">S'inscrire</a>
+                           <a  class="btn btn-primary"  href="register.php">S'inscrire</a>
                         </div>
                      </div>
                   </div>
