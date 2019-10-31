@@ -1,9 +1,7 @@
 
- - taille du password 255 après hachage
- - créer toujours un utilisateur
- - attention, renommer les clés étrangères pour retirer le prefixe
-- penser à cascade
-- voir pour vérifier si un siren de commerce déjà instancié peut être de nouveau créer. 
+Site from scratch présenté lors du passage du titre profesionnel "Développeu web et web Mobile" 
+
+HTML / CSS / Bootsrap / JS / Ajax / Php - Poo / SQL 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
